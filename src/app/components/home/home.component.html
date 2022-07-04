@@ -1,0 +1,133 @@
+<app-navbar></app-navbar>
+<ng-container *ngIf="loggedInUserRole == 'admin'">
+
+  <mat-toolbar color="primary">
+    <button mat-icon-button class="example-icon" area-label="Example icon-button with menu icon">
+      <mat-icon>supervised_user_circle</mat-icon>
+    </button>
+    <span>Welcome Admin</span>
+    <span class="example-spacer"></span>
+    <button mat-raised-button color="warn" (click)="addUser()">Add User</button>
+  </mat-toolbar>
+
+  <div class="container">
+    <div style="margin-top: 10px;">
+      <mat-form-field appearance="standard">
+        <mat-label>Filter</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input />
+      </mat-form-field>
+      <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" matSort>
+          <!-- User Name Column -->
+          <ng-container matColumnDef="userName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>User Name</th>
+            <td mat-cell *matCellDef="let row">{{ row.username }}</td>
+          </ng-container>
+
+          <!-- Email Column -->
+          <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+            <td mat-cell *matCellDef="let row">{{ row.email }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="password">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Password</th>
+            <td mat-cell *matCellDef="let row">{{ row.password }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="select_role">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Role</th>
+            <td mat-cell *matCellDef="let row">{{ row.select_role }}</td>
+          </ng-container>
+
+          <!-- Action Column -->
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>
+            <td mat-cell *matCellDef="let row">
+              <div class="d-flex">
+                <button mat-icon-button color="primary" (click)="editUser(row)">
+                  <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button color="warn" (click)="deleteUser(row.id)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+          <!-- Row shown when there is no matching data. -->
+          <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">
+              No data matching the filter "{{ input.value }}"
+            </td>
+          </tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="loggedInUserRole == 'user'">
+  <!-- <mat-card>
+      <mat-card-title>Welcome {{loggedInUser.username}}</mat-card-title>
+      <mat-card-content>
+        <button mat-raised-button (click)="editLoggedInUser(loggedInUserDetails)">Edit Profile</button>
+      </mat-card-content>
+      <mat-card-actions>
+      </mat-card-actions>
+    </mat-card> -->
+
+  <mat-toolbar color="primary">
+    <button mat-icon-button class="example-icon" area-label="Example icon-button with menu icon">
+      <mat-icon>supervised_user_circle</mat-icon>
+    </button>
+    <span>Welcome {{loggedInUser.username}}</span>
+    <span class="example-spacer"></span>
+  </mat-toolbar>
+
+  <div class="container">
+    <div style="margin-top: 30px;">
+      <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" matSort>
+          <!-- User Name Column -->
+          <ng-container matColumnDef="userName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>User Name</th>
+            <td mat-cell *matCellDef="let row">{{ row.username }}</td>
+          </ng-container>
+
+          <!-- Email Column -->
+          <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+            <td mat-cell *matCellDef="let row">{{ row.email }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="password">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Password</th>
+            <td mat-cell *matCellDef="let row">{{ row.password }}</td>
+          </ng-container>
+
+          <!-- Action Column -->
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>
+            <td mat-cell *matCellDef="let row">
+              <div class="d-flex">
+                <button mat-icon-button color="primary" (click)="editLoggedInUser(row)">
+                  <mat-icon>edit</mat-icon>
+                </button>
+              </div>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="userProfile"></tr>
+          <tr mat-row *matRowDef="let row; columns: userProfile"></tr>
+
+        </table>
+      </div>
+    </div>
+  </div>
+</ng-container>

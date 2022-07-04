@@ -1,0 +1,32 @@
+{
+  "signupFormData": [
+    {
+      "username": "admin",
+      "email": "admin@admin",
+      "password": "admin",
+      "confirm_password": "admin",
+      "select_role": "admin",
+      "id": 1
+    },
+    {
+      "username": "user",
+      "email": "user@user.com",
+      "password": "user",
+      "confirm_password": "user",
+      "select_role": "user",
+      "id": 2
+    }
+  ],
+  "loginFormData": [
+    {
+      "username": "admin",
+      "password": "admin",
+      "id": 1
+    },
+    {
+      "username": "user",
+      "password": "user",
+      "id": 2
+    }
+  ]
+}

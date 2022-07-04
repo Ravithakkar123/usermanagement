@@ -1,0 +1,58 @@
+<h1 mat-diag-title>Add new user</h1>
+<div class="example-container">
+  <form [formGroup]="addNewUserForm">
+    <mat-form-field appearance="fill">
+      <mat-label>Enter your Username</mat-label>
+      <!-- <input
+              matInput
+              name="userName"
+              formControl="userName"
+            /> -->
+      <input matInput type="text" class="form-control" placeholder="Username" name="username" 
+        formControlName="username" />
+
+      <!-- <mat-error *ngIf="userName.invalid">{{ getErrorMessage() }}</mat-error> -->
+      <!-- <mat-error *ngIf="!addNewUserForm.get('username').invalid && addNewUserForm.get('username').touched" class="enter">Please Enter a Valid username</mat-error> -->
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Enter your email</mat-label>
+      <!-- <input
+              matInput
+              name="email"
+              formControl="email"
+            /> -->
+      <input matInput type="email" class="form-control" name="email" placeholder="Email Address"
+        formControlName="email" />
+
+
+      <!-- <mat-error *ngIf="email.invalid">{{ getErrorMessage() }}</mat-error> -->
+      <!-- <mat-error *ngIf="!addNewUserForm.get('email').invalid && addNewUserForm.get('email').touched  " class="enter">Please Enter a Valid email</mat-error> -->
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Enter your password</mat-label>
+      <input matInput [type]="hidePassword ? 'password' : 'text'" name="password" formControlName="password" />
+      <!-- <mat-error *ngIf="email.invalid">{{ getErrorMessage() }}</mat-error> -->
+      <!-- <mat-error *ngIf="!addNewUserForm.get('password').invalid && addNewUserForm.get('password').touched " class="enter">Please Enter a Valid password</mat-error> -->
+
+      <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword">
+        <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+      </button>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Confirm Password</mat-label>
+      <input matInput [type]="hidePassword ? 'password' : 'text'" name="confirm_password"
+        formControlName="confirm_password" />
+      <!-- <mat-error *ngIf="addNewUserForm.get('confirm_password')?.errors?.confirmedValidator"  class="enter">Password and Confirm Password must not  be match.</mat-error> -->
+      <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword">
+        <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+      </button>
+    </mat-form-field>
+    <!-- </div> -->
+
+    <div mat-diag-action [align]="'end'">
+      <button mat-raised-button color="warn" mat-dialog-close>Close</button>
+      <button style="margin-left: 8px;" mat-raised-button color="primary" (click)="addNewUser()">
+        {{actionBtn}}
+      </button>
+    </div>
+  </form>
